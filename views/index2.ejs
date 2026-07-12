@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add movie</title>
+    <link rel="stylesheet" href="/style2.css">
+</head>
+
+<body>
+
+    <div class="container">
+        
+        <% if(search) { %>
+        <h1>🎬 Add Movie</h1>
+
+        <!-- Search -->
+        <form action="/search" method="POST" class="search-box">
+
+            <input type="text" name="movie" placeholder="Search a movie..."  required>
+
+            <button type="submit">
+                Search
+            </button>
+
+        </form>
+     <% } %>
+        <!-- Movie Card -->
+        <% if(movie===null && error===null) {%>
+            <%} %>
+                <% if (error) { %>
+                    <div class="error">
+                        <h2>
+                            <%= error %>
+                        </h2>
+                    </div>
+                <% } %>
+
+                        <% if(movie){ %>
+
+                            <div class="movie-card">
+
+                                <img src="<%= movie.Poster %>" alt="<%=movie.Title %>">
+
+                                <div class="movie-info">
+
+                                    <h2>
+                                        <%= movie.Title %>
+                                    </h2>
+
+                                    <p>
+                                        <strong>Year:</strong>
+                                        <%= movie.Year %>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Hidden form appears only after movie found -->
+                            <form action="/saveMovie" method="POST" class="review-form">
+
+                                <input type="hidden" name="title" value="<%= movie.Title   %>">
+                                <input type="hidden" name="genre" value="<%= movie.Genre%>">
+
+                                <input type="hidden" name="poster" value="<%= movie.Poster %>">
+
+                                <input type="hidden" name="year" value="<%= movie.Year %>">
+
+
+                                <label>Your Rating</label>
+
+                                <input type="number" name="rating" min="1" max="10" placeholder="Rate out of 10"
+                                    required>
+
+
+                                <label>Your Review</label>
+
+                                <textarea name="review" rows="6" placeholder="Write your thoughts..."></textarea>
+
+
+                                <button class="save-btn">
+                                    Save Movie
+                                </button>
+
+                            </form>
+
+                            <% } %>
+
+
+         <% if(edit){ %>
+                            <div class="movie-card">
+
+                                <img src="<%= edit_movie.photo %>" alt="<%=edit_movie.movie %>">
+
+                                <div class="movie-info">
+
+                                    <h2>
+                                        <%= edit_movie.movie %>
+                                    </h2>
+
+                                    <p>
+                                        <strong>Year:</strong>
+                                        <%= edit_movie.year %>
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Hidden form appears only after movie found -->
+                            <form action="/editMovie" method="POST" class="review-form">
+
+                                <input type="hidden" name="title" value="<%= edit_movie.movie  %>">
+                                <input type="hidden" name="genre" value="<%= edit_movie.genre%>">
+                                <input type="hidden" name="poster" value="<% edit_movie.photo %>">
+                                <input type="hidden" name="year" value="<%= edit_movie.year %>">
+                                <input type="hidden" name="id" value="<%= edit_movie.id %>">
+
+
+                                <label>Your Rating</label>
+
+                                <input type="number" name="rating" min="1" max="10" value="<%= edit ? edit_movie.rating : '' %>" placeholder="Rate out of 10"
+                                    required>
+
+
+                                <label>Your Review</label>
+
+                                <textarea name="review" rows="6" placeholder="Write your thoughts..."><%= edit ? edit_movie.review : '' %></textarea>
+
+
+                                <button class="save-btn">
+                                    Save Movie
+                                </button>
+
+                            </form>
+
+                            <% } %>                   
+
+
+    </div>
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+
+    <div class="logo">
+        🎬 MovieCritic
+    </div>
+<!-- 
+    <nav>
+
+        <a href="/">Home</a>
+
+        <a href="/movies">Movies</a>
+
+        <a href="/about">About</a>
+
+    </nav> -->
+<a href="/add_movie" >
+    <button class="add-button-link">Add Movie</button>
+</a>
+</header>
+
+
+    <div class="title">
+        <h1>Movies I’ve Watched</h1>
+        <!-- <div class="title-text"> -->
+        <h2 class="strong" style="color: #a7a9ab;">Every Movie Has a Story. Every Story Deserves an Honest Review.</h2>
+        <p  class="small_strong" style="color: #878f97;">Hi! I've created a website showcasing the Movie's 
+                                                    I've watched, along with reviews and ratings. Why?
+                                                     Because I tend forget, and I want to remember what
+                                                      I've watched and liked.
+                                                    Now, Take suggestions at your own risk; the ratings and 
+                                                    reviews are purely my personal opinion. Enjoy exploring my movies 
+                                                    world, and happy watching!</p>
+        <!-- </div> -->
+             
+        <form action="/search" method="POST" class="search-form">
+                        <input type="text" name="movie" id="find" placeholder="Search Movies...">
+                    </input>
+                        <!-- <select name="genre">
+                            <option value="">All Genres</option>
+                            <option value="Action">Action</option>
+                            <option value="Comedy">Comedy</option>
+                            <option value="Drama">Drama</option>
+                            <option value="Sci-Fi">Sci-Fi</option>
+                            <option value="Horror">Horror</option>
+                        </select> -->
+                        <!-- <button type="submit">
+                            🔍
+                        </button> -->
+        </form>
+        
+    </div>
+   
+
+    <div class="movies">
+    <% movies.forEach((movie) => { %>
+<div class="wrapper">
+    <div class="movie">
+        <div class = "photo">
+            <img src="<%= movie.photo %>" alt="<%= movie.movie %>">
+            <h4 style="color: #a7a9ab;">how strongly I recommend it: <%= movie.rating %>/10</h4>
+
+        </div>
+        <div class = "movie_info">
+            <div class = "movie_title">
+                <h2 class="movie_name"><%= movie.movie%></h2>
+                <p class="year"><%= movie.year %></p>
+            </div>
+            <p class="genre"><%= movie.genre %></p>
+            <h3 style="color: #a7a9ab;"> <%= movie.review %> </h3>
+            <a href="/edit_movie/<%= movie.id %>" >
+                <button class="edit_btn">Edit</button>
+            </a>
+        </div>
+    </div>
+    <hr class="hr" style="width:100%; height:1px; border:none; background:#556677;">
+</div>
+    <% }) %>
+  
+    </div>
+
+<footer>
+    <div class="upper">
+        <p>Honest movie reviews and ratings.</p>
+        <div class="social">
+            <strong style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Contact</strong>
+            <a href="mailto:safaalm19161@gmail.com"><img src="/email.png"></a>
+            <a href="https://www.linkedin.com/in/safa-alam19161?utm_source=share_via&utm_content=profile&utm_medium=member_android"><img src="/message.png"></a>
+            <a href="#"><img src="/instagram (1).png"></a>
+        </div>
+    </div>
+    <hr style="width:100%; height:1px; border:none; background:#556677;">
+    <p>© 2026 Safa's Movie Showcase. All rights reserved.</p>
+    <p>Book cover images from Open Library and other online resources. Last updated: July 2024</p>
+    <p>All opinions expressed are personal and do not reflect those of authors or publishers</p>
+</footer>
+
+
+    <script>
+    const find = document.getElementById("find");
+    const movies = document.querySelectorAll(".movie");
+    find.addEventListener("input", () => {
+    const text = find.value.toLowerCase();
+    movies.forEach(movie => {
+        const hr = movie.nextElementSibling;
+      const name = movie.querySelector(".movie_name").textContent.toLowerCase();
+      if (name.includes(text)) { movie.style.display = "flex" ; if(hr){hr.style.display = "block"}; }
+      else { movie.style.display = "none";    if (hr) hr.style.display = "none";}
+    })
+    
+})</script>
+    
+</body>
+</html>
