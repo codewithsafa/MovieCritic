@@ -38,15 +38,20 @@ https://moviecritic-1wql.onrender.com
 
 ## 📷 Screenshots
 
-<img sr>
-_Add screenshots of your homepage and Add Movie page here._
+
+<p style="text-align: center;">
+  <img src="assets/homepage.png" width="45%">
+  <img src="assets/search page.png" width="45%">
+  <img src="assets/edit page.png" width="45%">
+</p>
+
 
 ## 🚀 Running Locally
 
 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+git clone https://github.com/codewithsafa/MovieCritic.git
 ```
 
 2. Install dependencies
@@ -72,11 +77,6 @@ OMDB_API_KEY=your_api_key
 node index.js
 ```
 
-5. Open
-
-```
-http://localhost:4000
-```
 
 ## 📌 Future Improvements
 
@@ -91,4 +91,4 @@ http://localhost:4000
 
 **Safa Alam**
 
-LinkedIn: https://www.linkedin.com/in/safa-alam19161
+Follow me on LinkedIn: https://www.linkedin.com/in/safa-alam19161?utm_source=share_via&utm_content=profile&utm_medium=member_android
