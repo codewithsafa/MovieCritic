@@ -38,6 +38,7 @@ https://moviecritic-1wql.onrender.com
 
 ## 📷 Screenshots
 
+<img sr>
 _Add screenshots of your homepage and Add Movie page here._
 
 ## 🚀 Running Locally
