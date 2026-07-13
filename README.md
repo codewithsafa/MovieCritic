@@ -37,8 +37,11 @@ https://moviecritic-1wql.onrender.com
 - Render
 
 ## 📷 Screenshots
-
-_Add screenshots of your homepage and Add Movie page here._
+<p align="center">
+  <img src="assets/homepage.png" width="45%">
+  <img src="assets/search page.png" width="45%">
+  <img src="assets/edit page.png" width="45%">
+</p>
 
 ## 🚀 Running Locally
 
