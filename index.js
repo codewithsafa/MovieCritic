@@ -27,7 +27,11 @@ const db = new pg.Client({
     },
 });
 
-db.connect();
+db.connect()
+  .then(() => console.log("Connected to Neon"))
+  .catch(err => console.error("Database connection failed:", err));
+
+
 app.set('view engine', 'ejs');
 
 
@@ -103,8 +107,9 @@ app.get("/", async (req, res) =>{
     })
 // })
 
-app.listen(4000, () => {
-  console.log("Server is running on port 4000");
-}
-)
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
