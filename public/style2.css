@@ -57,9 +57,9 @@ body{
 }
 
 .container{
-
-    width:900px;
-    max-width:95%;
+    width:100%;
+    max-width:900px;
+    margin:0 auto;
 }
 
 h1{
@@ -68,41 +68,36 @@ h1{
     margin-bottom:40px;
     font-size:42px;
 }
-
 .search-box{
-
     display:flex;
     justify-content:center;
+    align-items:center;
     gap:15px;
+    width:100%;
 }
-
 .search-box input{
+    flex:1;
+    max-width:500px;
 
-    width:500px;
     padding:15px;
-
     font-size:18px;
 
     border:none;
     border-radius:10px;
-
     outline:none;
 }
-
 .search-box button{
 
-    padding:15px 28px;
-
-    border:none;
+    width:140px;
+    height:52px;
 
     background:#ff4444;
-
     color:white;
 
+    border:none;
     border-radius:10px;
 
     cursor:pointer;
-
     font-size:17px;
 
     transition:.3s;
@@ -131,9 +126,9 @@ h1{
 }
 
 .movie-card img{
-
-    width:220px;
-
+    width:100%;
+    max-width:220px;
+    height:auto;
     border-radius:12px;
 }
 
@@ -201,31 +196,29 @@ h1{
 }
 
 .save-btn{
+    width:220px;
+    padding:16px;
+    margin:25px auto 0;
 
-    width:200px;
+    display:block;
 
-    padding:15px;
-
-    margin-top:10px;
-
-    background:#00b894;
-
-    color:white;
+    background:#00E054;
+    color:#fff;
 
     border:none;
-
-    border-radius:8px;
+    border-radius:10px;
 
     cursor:pointer;
 
     font-size:18px;
+    font-weight:600;
 
-    transition:.3s;
+    transition:transform .3s ease;
 }
 
 .save-btn:hover{
-
-    background:#009874;
+    background:#00c94d;
+    transform:translateY(-2px);
 }
 .error{
     width:500px;
@@ -260,3 +253,109 @@ h1{
 
     transition:.3s;
 } */
+ /* =========================
+   Tablet
+========================= */
+
+@media (max-width: 992px){
+
+    .container{
+        width:95%;
+    }
+
+    .movie-card{
+        gap:20px;
+    }
+
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width:768px){
+
+    body{
+        padding:20px;
+    }
+
+    h1{
+        font-size:2.2rem;
+        margin-bottom:30px;
+    }
+
+   .search-box{
+    flex-direction:column;
+    align-items:center;
+}
+
+.search-box input{
+    width:100%;
+}
+
+.search-box button{
+    width:180px;
+}
+
+    .movie-card{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+    }
+
+    .movie-card img{
+        max-width:220px;
+    }
+
+    .movie-info{
+        align-items:center;
+    }
+
+    .movie-info h2{
+        font-size:28px;
+    }
+
+    .movie-info p{
+        font-size:18px;
+    }
+
+   
+
+    .error{
+        width:100%;
+    }
+
+}
+
+/* =========================
+   Small Phones
+========================= */
+
+@media (max-width:480px){
+
+    body{
+        padding:15px;
+    }
+
+    h1{
+        font-size:1.8rem;
+    }
+
+    .movie-card{
+        padding:18px;
+    }
+
+    .movie-info h2{
+        font-size:24px;
+    }
+
+    .movie-info p{
+        font-size:16px;
+    }
+
+    .review-form input,
+    .review-form textarea{
+        font-size:16px;
+    }
+
+}
