@@ -81,6 +81,12 @@ h1{
     justify-content:right
     
 } */
+.header-buttons{
+    display:flex;
+    justify-content:space-around;
+    gap: 20px;
+    
+}
 .add-movie-link{
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-size: 30px;
@@ -88,17 +94,25 @@ h1{
     margin-top: 60px;
     
  }
-.title{
-    text-align:center;
-    display:grid;
-    gap:10px;
-    justify-items:center;
-    width:90%;
-    max-width:900px;
-    margin:0 auto;
-}.add-button-link{
+ .logout-link{
     display:inline-block;
-    width:200px;
+    width:50px;
+    padding:15px;
+    margin-top:10px;
+    background:#be5307;
+    color:#fff;
+    text-decoration:none;
+    text-align:center;
+    border-radius:8px;
+    font-size:18px;
+    transition:0.3s ease;
+}
+ .logout-link:hover{
+    transform: scale(1.03);
+ }
+ .my-movie-link, .login-link{
+    display:inline-block;
+    width:100px;
     padding:15px;
     margin-top:10px;
     background:#00E054;
@@ -109,7 +123,33 @@ h1{
     font-size:18px;
     transition:0.3s ease;
 }
- .add-button-link:hover{
+ .my-movie-link:hover{
+    transform: scale(1.03);
+ }
+
+ 
+.title{
+    text-align:center;
+    display:grid;
+    gap:10px;
+    justify-items:center;
+    width:90%;
+    max-width:900px;
+    margin:0 auto;
+}.add-movie-link{
+    display:inline-block;
+    width:100px;
+    padding:15px;
+    margin-top:10px;
+    background:#00E054;
+    color:#fff;
+    text-decoration:none;
+    text-align:center;
+    border-radius:8px;
+    font-size:18px;
+    transition:0.3s ease;
+}
+ .add-movie-link:hover{
     transform: scale(1.03);
  }
  .edit_btn{
