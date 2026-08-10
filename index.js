@@ -114,6 +114,7 @@ app.post("/search", async (req, res) => {
     // res.redirect("/");
 
 app.post("/saveMovie" ,valid, async (req,res) => {
+  try{
   const title = req.body.title;
   const rating = req.body.rating;
   const review = req.body.review;
@@ -121,7 +122,15 @@ app.post("/saveMovie" ,valid, async (req,res) => {
   const userId = req.user.id;
   await db.query("insert into user_movie (movie,rating,review,year,genre,photo,user_id) values ($1, $2, $3,$4,$5,$6,$7)" , [title,rating,review,year,genre,poster,userId])
   res.redirect("/my_movie");
-})
+  } catch (err) {
+    console.error("SAVE MOVIE ERROR:", err);
+    res.status(500).send("Something went wrong");
+  }
+  
+} )
+
+
+
 
 app.get("/",async (req, res) =>{
     
@@ -208,10 +217,10 @@ app.get("/logout", (req,res) => {
       console.error("Error during logout:", err);
       res.redirect("/");
     } else {
-      res.redirect("/register");
+      res.redirect("/");
     }
   })
-})
+}) 
 
 
 passport.serializeUser((user, cb) => {
