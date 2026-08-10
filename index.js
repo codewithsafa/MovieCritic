@@ -135,12 +135,12 @@ app.post("/saveMovie" ,valid, async (req,res) => {
 app.get("/",async (req, res) =>{
     
      const result = await db.query("select * from user_movie order by rating desc");
-     res.render("index.ejs", {movies: result.rows});
+     res.render("index.ejs", {movies: result.rows, myMovie: false});
     })
 
 app.get("/my_movie",valid, async (req, res) =>{
   const userData = await db.query("select * from user_movie where user_id = $1 order by rating desc", [req.user.id]);
-  res.render("index.ejs", {movies: userData.rows});
+  res.render("index.ejs", {movies: userData.rows, myMovie: true});
 })
 
 app.get("/register", async (req, res) =>{

@@ -85,9 +85,11 @@
             </div>
             <p class="genre"><%= movie.genre %></p>
             <h3 style="color: #a7a9ab;"> <%= movie.review %> </h3>
-            <a href="/edit_movie/<%= movie.id %>" >
-                <button class="edit_btn">Edit</button>
+            <% if (myMovie) { %>
+            <a href="/edit_movie/<%= movie.id %>">
+               <button class="edit_btn">Edit</button>
             </a>
+            <% } %>
         </div>
     </div>
     <hr class="hr" style="width:100%; height:1px; border:none; background:#556677;">
