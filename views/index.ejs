@@ -115,8 +115,8 @@
 </footer>
 
 
-    <script>
-    const find = document.getElementById("find");
+<script>  
+        const find = document.getElementById("find");
     const movies = document.querySelectorAll(".movie");
     find.addEventListener("input", () => {
     const text = find.value.toLowerCase();
@@ -127,7 +127,22 @@
       else { movie.style.display = "none";    if (hr) hr.style.display = "none";}
     })
     
-})</script>
+})
+
+
+async function loadUserData() {
+  const response = await fetch('/') 
+   .then(response => response.json())
+    .then(user => {
+
+        if (user.role !== "admin") {
+            document.getElementById("admin-options").style.display = "none";
+        }
+
+    });
+}
+    </script>
+
     
 </body>
 </html>

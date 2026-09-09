@@ -53,30 +53,35 @@ app.use((req, res, next) => {
   next();
 });
 
-function valid(req,res,next){
+function requireRole(...role) {
+  return function valid(req,res,next){
   if (req.isAuthenticated()) {
     return next();
   }
   else {
     res.redirect("/register");
   }
+  if (!role.includes(req.user.role)) {
+     return res.status(403).send("Admin access required");
   }
+}}
+
 app.get("/logo", (req,res) => {
   res.redirect("/");
 });
 
-app.get("/add_movie",valid, async (req,res) => {
+app.get("/add_movie",requireRole("admin","user"), async (req,res) => {
   res.render("index2.ejs", {movie: null, error: null, edit: null, search : true});
 }
 )
 
-app.get("/edit_movie/:id" ,valid, async (req,res) => {
+app.get("/edit_movie/:id" ,requireRole("admin","user"), async (req,res) => {
     const id = req.params.id;
     const dbData = await db.query("select * from user_movie where id = $1", [id]);
     res.render("index2.ejs",{ edit : true , edit_movie :dbData.rows[0] , error:null, movie: null, search : null});
 })
 
-app.post("/editMovie",valid, async (req,res) => {
+app.post("/editMovie",requireRole("admin","user"), async (req,res) => {
   const {rating,review,id} = req.body;
   await db.query("update user_movie set rating=$1 , review = $2 where id = $3 " , [rating,review,id])
   res.redirect("/");
@@ -113,7 +118,7 @@ app.post("/search", async (req, res) => {
 
     // res.redirect("/");
 
-app.post("/saveMovie" ,valid, async (req,res) => {
+app.post("/saveMovie" ,requireRole("admin","user"), async (req,res) => {
   try{
   const title = req.body.title;
   const rating = req.body.rating;
@@ -132,13 +137,14 @@ app.post("/saveMovie" ,valid, async (req,res) => {
 
 
 
-app.get("/",async (req, res) =>{
+app.get("/", async (req, res) =>{
     
      const result = await db.query("select * from user_movie order by rating desc");
      res.render("index.ejs", {movies: result.rows, myMovie: false});
+     res.json( user );
     })
 
-app.get("/my_movie",valid, async (req, res) =>{
+app.get("/my_movie",requireRole("admin","user"), async (req, res) =>{
   const userData = await db.query("select * from user_movie where user_id = $1 order by rating desc", [req.user.id]);
   res.render("index.ejs", {movies: userData.rows, myMovie: true});
 })
@@ -165,8 +171,9 @@ app.post("/register" , async (req,res) => {
           console.error("Error hashing password:", err);
           res.redirect("/register", { message: "Error occurred. Please try again." });
         } else {
+
            const result = await db.query(
-        "INSERT INTO user_details (email, password) VALUES ($1, $2) returning *",[email, hash]);
+        "INSERT INTO user_details (email, password,role) VALUES ($1, $2,$3) returning *",[email, hash, "user"]);
          const user = result.rows[0];
          req.login(user,(err) => {
          res.redirect("/");
@@ -236,7 +243,8 @@ passport.deserializeUser(async (id, cb) => {
             return cb(null, false);
         }
         const user = result.rows[0];
-        cb(null, user);}
+        cb(null, user);
+       }
          catch (error) {
     console.error("Error deserializing user:", error);
     cb(error, null);
